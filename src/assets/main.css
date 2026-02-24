@@ -1,0 +1,275 @@
+/* ============================================
+   GooseBay — Bold Retro 70s Gig Poster Theme
+   ============================================ */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* Bold retro palette */
+  --color-orange:      #F28C28;
+  --color-purple:      #7B3FBF;
+  --color-yellow:      #F4C430;
+  --color-blue:        #3A6EA5;
+  --color-cream:       #F5E6D3;
+  --color-off-black:   #1A1A1A;
+
+  /* Derived */
+  --color-purple-dark: #5A2D8C;
+  --color-orange-dark: #D4711F;
+  --color-blue-dark:   #2C5580;
+  --color-yellow-light:#FBE19A;
+
+  /* Typography */
+  --font-display: 'Lilita One', cursive;
+  --font-body:    'Nunito', sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+
+  /* Border radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --radius-full: 50px;
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-off-black);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Subtle noise / grain overlay for that analog feel */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+
+p {
+  max-width: 65ch;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+a {
+  color: var(--color-purple);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-orange);
+}
+
+/* ---------- Utility Classes ---------- */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--space-lg) 0;
+  position: relative;
+}
+
+.section--purple {
+  background-color: var(--color-purple);
+  color: var(--color-cream);
+}
+
+.section--orange {
+  background-color: var(--color-orange);
+  color: var(--color-off-black);
+}
+
+.section--yellow {
+  background-color: var(--color-yellow);
+  color: var(--color-off-black);
+}
+
+.section--dark {
+  background-color: var(--color-off-black);
+  color: var(--color-cream);
+}
+
+.section--alt {
+  background-color: var(--color-off-black);
+  color: var(--color-cream);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.accent {
+  color: var(--color-purple);
+}
+
+.accent-orange {
+  color: var(--color-orange);
+}
+
+.accent-yellow {
+  color: var(--color-yellow);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.4rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-purple);
+  color: var(--color-cream);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(123, 63, 191, 0.3);
+}
+
+.btn:hover {
+  background: var(--color-purple-dark);
+  color: var(--color-cream);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(123, 63, 191, 0.4);
+}
+
+.btn--filled {
+  background: var(--color-orange);
+  color: var(--color-off-black);
+  box-shadow: 0 4px 15px rgba(242, 140, 40, 0.3);
+}
+
+.btn--filled:hover {
+  background: var(--color-orange-dark);
+  color: var(--color-cream);
+  box-shadow: 0 6px 20px rgba(242, 140, 40, 0.4);
+}
+
+.btn--yellow {
+  background: var(--color-yellow);
+  color: var(--color-off-black);
+  box-shadow: 0 4px 15px rgba(244, 196, 48, 0.3);
+}
+
+.btn--yellow:hover {
+  background: var(--color-orange);
+  color: var(--color-off-black);
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* ---------- Wavy Section Dividers ---------- */
+.wave-divider {
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+
+/* ---------- Dividers ---------- */
+.divider {
+  width: 80px;
+  height: 4px;
+  background: var(--color-orange);
+  margin: var(--space-sm) auto;
+  border: none;
+  border-radius: 2px;
+}
+
+/* ---------- Scrollbar (Webkit) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-purple);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-purple-dark);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-off-black);
+}
