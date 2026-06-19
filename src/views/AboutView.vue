@@ -17,19 +17,22 @@
         <div class="about__text" data-reveal data-delay="2">
           <h2>Who We Are</h2>
           <p>
-            GooseBay is an indie rock outfit hailing from Australia with a love
-            for warm analog tones, anthemic hooks, and the kind of riffs that
-            sound best blasting from a van window on a coastal highway.
+            Goose Bay is a rising five-piece indie rock band based in
+            Naarm/Melbourne, known for their energetic live shows and
+            surf-rock influences. Hailing from the eastern suburbs, they've
+            been making waves in the local scene with popular tracks like
+            "Dance With You".
           </p>
           <p>
-            Drawing from the same well as Spacey Jane, The Backseat Lovers, and
-            the golden age of Aussie guitar music, GooseBay crafts songs about
-            growing up, getting lost, and finding your way back.
+            Drawing on warm analog tones, anthemic hooks, and sun-drenched
+            riffs, Goose Bay crafts songs that sound best blasting from a van
+            window on a coastal highway — music about growing up, getting
+            lost, and finding your way back.
           </p>
           <p>
-            What started as late-night jam sessions quickly turned into
-            something bigger a sound drenched in sun-faded nostalgia and
-            youthful energy.
+            What started as late-night jam sessions has quickly turned into
+            something bigger: a sound that's captured the hearts of Melbourne's
+            live music scene and beyond.
           </p>
         </div>
       </div>

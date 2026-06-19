@@ -10,10 +10,10 @@
         <div class="hero__blob hero__blob--3"></div>
       </div>
       <div class="hero__content container fade-in-up">
-        <p class="hero__kicker">Indie Rock · Australia</p>
+        <p class="hero__kicker">Indie Rock · Surf Rock · Naarm/Melbourne</p>
         <h1 class="hero__title">Goose<span>Bay</span></h1>
         <p class="hero__sub">
-          Sun-drenched riffs, late-night drives, and the sound of the coast.
+          Five-piece indie rock from Naarm/Melbourne — surf-rock energy, anthemic hooks, and the sound of the coast.
         </p>
         <div class="hero__actions">
           <router-link to="/music" class="btn btn--filled">Listen Now</router-link>
@@ -65,7 +65,7 @@
           <h2>Goose Bay</h2>
           <hr class="divider" />
           <p>
-            This is the part where we tell them a bit about us and how bad of a band we are ;).
+            A rising five-piece from the eastern suburbs of Melbourne, making waves with their energetic live shows, surf-rock influences, and tracks like "Dance With You".
           </p>
           <router-link to="/about" class="btn">Meet the Band</router-link>
         </div>
