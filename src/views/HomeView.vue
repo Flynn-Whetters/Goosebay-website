@@ -187,7 +187,7 @@
 import '../assets/css/home.css'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal.js'
-import heroBg from '../assets/Images/banckground.webp'
+import heroBg from '../assets/images/banckground.webp'
 
 import img01 from '../assets/images/Dance wth you promo revised/C001580-R1-14-14A.png'
 import img02 from '../assets/images/Dance wth you promo revised/C001580-R1-16-16A.png'
