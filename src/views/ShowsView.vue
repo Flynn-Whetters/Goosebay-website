@@ -16,17 +16,38 @@
       <div class="container">
         <h2 class="accent" style="margin-bottom: 1.5rem;">Upcoming</h2>
 
-        <div v-if="upcomingShows.length" class="shows-list">
+        <!-- Loading skeletons -->
+        <div v-if="loading" class="shows-list">
+          <div class="show-card show-card--skeleton" v-for="n in 3" :key="n">
+            <div class="skeleton-date"></div>
+            <div class="skeleton-details">
+              <div class="skeleton-line skeleton-line--title"></div>
+              <div class="skeleton-line skeleton-line--sub"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div v-else-if="error" class="empty-state text-center">
+          <p style="font-size: 3rem;">⚡</p>
+          <h3 style="margin-top: 1rem;">Couldn't Load Shows</h3>
+          <p style="margin-top: 0.5rem; opacity: 0.6;">{{ error }}</p>
+          <button class="btn" style="margin-top: 1.5rem;" @click="refetch">Try Again</button>
+        </div>
+
+        <!-- Shows list -->
+        <div v-else-if="upcomingShows.length" class="shows-list">
           <div
             class="show-card"
             v-for="(show, i) in upcomingShows"
-            :key="show.date + show.venue"
+            :key="String(show._date) + show.venue"
             data-reveal
             :data-delay="String(Math.min(i, 3))"
           >
             <div class="show-card__date">
               <span class="show-card__day">{{ show.day }}</span>
               <span class="show-card__month">{{ show.month }}</span>
+              <span class="show-card__year">{{ show.year }}</span>
             </div>
             <div class="show-card__details">
               <h3>{{ show.venue }}</h3>
@@ -46,6 +67,7 @@
           </div>
         </div>
 
+        <!-- Empty -->
         <div v-else class="empty-state text-center">
           <p style="font-size: 3rem;">🎤</p>
           <h3 style="margin-top: 1rem;">No Shows Announced Yet</h3>
@@ -63,20 +85,21 @@
     </section>
 
     <!-- Past Shows -->
-    <section class="section section--purple" v-if="pastShows.length">
+    <section class="section section--purple" v-if="!loading && pastShows.length">
       <div class="container">
-        <h2 class="accent" style="margin-bottom: 1.5rem;">Past Shows</h2>
+        <h2 class="accent-yellow" style="margin-bottom: 1.5rem;">Past Shows</h2>
         <div class="shows-list shows-list--past">
           <div
             class="show-card show-card--past"
             v-for="(show, i) in pastShows"
-            :key="show.date + show.venue"
+            :key="String(show._date) + show.venue"
             data-reveal
             :data-delay="String(Math.min(i, 3))"
           >
             <div class="show-card__date">
               <span class="show-card__day">{{ show.day }}</span>
               <span class="show-card__month">{{ show.month }}</span>
+              <span class="show-card__year">{{ show.year }}</span>
             </div>
             <div class="show-card__details">
               <h3>{{ show.venue }}</h3>
@@ -103,12 +126,10 @@
 
 <script setup>
 import '../assets/css/shows.css'
-import { ref } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal.js'
+import { useShows } from '../composables/useShows.js'
 
 useScrollReveal()
 
-const upcomingShows = ref([])
-
-const pastShows = ref([])
+const { upcomingShows, pastShows, loading, error, refetch } = useShows()
 </script>
