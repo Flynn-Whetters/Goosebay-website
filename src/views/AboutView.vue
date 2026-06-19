@@ -30,7 +30,7 @@
           </p>
           <p>
             What started as late-night jam sessions quickly turned into
-            something bigger — a sound drenched in sun-faded nostalgia and
+            something bigger a sound drenched in sun-faded nostalgia and
             youthful energy.
           </p>
         </div>

@@ -53,12 +53,10 @@
         </div>
         <div class="about-teaser__text">
           <span class="section-label">The Band</span>
-          <h2>Born from the coast</h2>
+          <h2>Goose Bay</h2>
           <hr class="divider" />
           <p>
-            Born out of backyard jams and coastal sunsets, GooseBay blends
-            nostalgic warmth with driving indie rock — think fuzzy guitars,
-            sing-along hooks, and golden-hour energy.
+            This is the part where we tell them a bit about us and how bad of a band we are ;).
           </p>
           <router-link to="/about" class="btn">Meet the Band</router-link>
         </div>
