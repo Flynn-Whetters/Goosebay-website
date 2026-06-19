@@ -32,26 +32,35 @@
       </svg>
     </div>
 
-    <!-- ===== MARQUEE STRIP ===== -->
-    <div class="marquee-strip" aria-hidden="true">
-      <div class="marquee-strip__track">
-        <img
-          v-for="(img, i) in marqueeImages"
+    <!-- ===== PHOTO STRIP ===== -->
+    <div class="photo-strip" aria-label="Band photos">
+      <div class="photo-strip__controls">
+        <button class="photo-strip__btn" @click="scrollStrip(-1)" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="photo-strip__btn" @click="scrollStrip(1)" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="photo-strip__inner" ref="stripRef">
+        <div
+          v-for="(img, i) in galleryImages"
           :key="i"
-          :src="img"
-          class="marquee-strip__img"
-          alt=""
-        />
+          class="photo-strip__item"
+          @click="openLightbox(i)"
+        >
+          <img :src="img" class="photo-strip__img" alt="" loading="lazy" />
+        </div>
       </div>
     </div>
 
     <!-- ===== ABOUT TEASER ===== -->
     <section class="section">
       <div class="container about-teaser">
-        <div class="about-teaser__image">
+        <div class="about-teaser__image" data-reveal>
           <img :src="img10" alt="GooseBay live" class="about-teaser__img" />
         </div>
-        <div class="about-teaser__text">
+        <div class="about-teaser__text" data-reveal data-delay="2">
           <span class="section-label">The Band</span>
           <h2>Goose Bay</h2>
           <hr class="divider" />
@@ -69,7 +78,7 @@
         <span class="section-label" style="border-color: var(--color-yellow); color: var(--color-yellow);">Watch</span>
         <h2 class="accent-yellow">Latest Video</h2>
         <hr class="divider" style="background: var(--color-yellow);" />
-        <div class="video-embed">
+        <div class="video-embed" data-reveal>
           <iframe
             src="https://www.youtube.com/embed/tMegEEow0Vk"
             title="GooseBay — Latest Video"
@@ -93,10 +102,11 @@
         <hr class="divider" />
         <div
           class="gallery"
+          data-reveal
           @mouseenter="stopAutoplay"
           @mouseleave="startAutoplay"
         >
-          <div class="gallery__frame" @click="next">
+          <div class="gallery__frame" @click="openLightbox(currentImage)">
             <transition name="gallery-fade" mode="out-in">
               <img
                 :src="galleryImages[currentImage]"
@@ -137,7 +147,7 @@
           Catch behind-the-scenes moments, gig announcements, and the occasional
           questionable band selfie.
         </p>
-        <div class="social-cta__grid">
+        <div class="social-cta__grid" data-reveal>
           <a href="https://www.instagram.com/goosebay.band/" target="_blank" rel="noopener noreferrer" class="btn">Instagram</a>
           <a href="https://www.tiktok.com/@goosebay.band" target="_blank" rel="noopener noreferrer" class="btn">TikTok</a>
           <a href="https://www.youtube.com/@goosebayband" target="_blank" rel="noopener noreferrer" class="btn">YouTube</a>
@@ -145,12 +155,38 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <Teleport to="body">
+      <div
+        v-if="lightboxOpen"
+        class="lightbox"
+        @click.self="closeLightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Photo viewer"
+      >
+        <button class="lightbox__close" @click="closeLightbox" aria-label="Close">✕</button>
+        <button class="lightbox__prev" @click="lightboxPrev" aria-label="Previous photo">‹</button>
+        <transition name="gallery-fade" mode="out-in">
+          <img
+            :src="galleryImages[lightboxIndex]"
+            :key="lightboxIndex"
+            class="lightbox__img"
+            alt="GooseBay photo"
+          />
+        </transition>
+        <button class="lightbox__next" @click="lightboxNext" aria-label="Next photo">›</button>
+        <div class="lightbox__counter">{{ lightboxIndex + 1 }} / {{ galleryImages.length }}</div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
 <script setup>
 import '../assets/css/home.css'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 import heroBg from '../assets/Images/banckground.webp'
 
 import img01 from '../assets/images/Dance wth you promo revised/C001580-R1-14-14A.png'
@@ -174,6 +210,8 @@ import img18 from '../assets/images/Dance wth you promo revised/Goose_Bay_BTS-40
 import img19 from '../assets/images/Dance wth you promo revised/Goose_Bay_BTS-40.png'
 import img20 from '../assets/images/Dance wth you promo revised/Goose_Bay_BTS-43.png'
 
+useScrollReveal()
+
 const galleryImages = [
   img01, img02, img03, img04, img05,
   img06, img07, img08, img09, img10,
@@ -181,8 +219,7 @@ const galleryImages = [
   img16, img17, img18, img19, img20,
 ]
 
-const marqueeImages = [...galleryImages, ...galleryImages]
-
+// Gallery autoplay
 const currentImage = ref(0)
 let timer = null
 
@@ -203,5 +240,45 @@ function stopAutoplay() {
 }
 
 onMounted(() => startAutoplay())
-onUnmounted(() => stopAutoplay())
+onUnmounted(() => {
+  stopAutoplay()
+  window.removeEventListener('keydown', onLightboxKey)
+})
+
+// Photo strip
+const stripRef = ref(null)
+function scrollStrip(dir) {
+  stripRef.value?.scrollBy({ left: dir * 280, behavior: 'smooth' })
+}
+
+// Lightbox
+const lightboxOpen = ref(false)
+const lightboxIndex = ref(0)
+
+function openLightbox(index) {
+  lightboxIndex.value = index
+  lightboxOpen.value = true
+  document.body.style.overflow = 'hidden'
+  window.addEventListener('keydown', onLightboxKey)
+}
+
+function closeLightbox() {
+  lightboxOpen.value = false
+  document.body.style.overflow = ''
+  window.removeEventListener('keydown', onLightboxKey)
+}
+
+function lightboxPrev() {
+  lightboxIndex.value = (lightboxIndex.value - 1 + galleryImages.length) % galleryImages.length
+}
+
+function lightboxNext() {
+  lightboxIndex.value = (lightboxIndex.value + 1) % galleryImages.length
+}
+
+function onLightboxKey(e) {
+  if (e.key === 'Escape') closeLightbox()
+  if (e.key === 'ArrowLeft') lightboxPrev()
+  if (e.key === 'ArrowRight') lightboxNext()
+}
 </script>

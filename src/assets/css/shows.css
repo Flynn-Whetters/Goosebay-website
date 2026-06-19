@@ -113,7 +113,7 @@
   align-items: center;
   min-width: 60px;
   padding: 0.35rem 0.75rem 0.35rem 0;
-  border-right: 2px solid rgba(232, 114, 28, 0.25);
+  border-right: 2px dashed rgba(232, 114, 28, 0.45);
 }
 
 .show-card__day {
@@ -235,7 +235,7 @@
 
   .show-card__date {
     border-right: none;
-    border-bottom: 2px solid rgba(232, 114, 28, 0.2);
+    border-bottom: 2px dashed rgba(232, 114, 28, 0.45);
     flex-direction: row;
     gap: 0.5rem;
     width: 100%;

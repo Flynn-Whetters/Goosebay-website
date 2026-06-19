@@ -19,8 +19,10 @@
         <div v-if="upcomingShows.length" class="shows-list">
           <div
             class="show-card"
-            v-for="show in upcomingShows"
+            v-for="(show, i) in upcomingShows"
             :key="show.date + show.venue"
+            data-reveal
+            :data-delay="String(Math.min(i, 3))"
           >
             <div class="show-card__date">
               <span class="show-card__day">{{ show.day }}</span>
@@ -67,8 +69,10 @@
         <div class="shows-list shows-list--past">
           <div
             class="show-card show-card--past"
-            v-for="show in pastShows"
+            v-for="(show, i) in pastShows"
             :key="show.date + show.venue"
+            data-reveal
+            :data-delay="String(Math.min(i, 3))"
           >
             <div class="show-card__date">
               <span class="show-card__day">{{ show.day }}</span>
@@ -100,29 +104,11 @@
 <script setup>
 import '../assets/css/shows.css'
 import { ref } from 'vue'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
-// TODO: Replace with real shows
-const upcomingShows = ref([
-  // Example:
-  // {
-  //   day: '15',
-  //   month: 'MAR',
-  //   venue: 'The Corner Hotel',
-  //   location: 'Melbourne, VIC',
-  //   info: 'w/ Special Guests',
-  //   ticketUrl: 'https://...',
-  // },
-])
+useScrollReveal()
 
-const pastShows = ref([
-  // Example:
-  // {
-  //   day: '20',
-  //   month: 'JAN',
-  //   venue: 'The Lansdowne',
-  //   location: 'Sydney, NSW',
-  // },
-])
+const upcomingShows = ref([])
+
+const pastShows = ref([])
 </script>
-
-

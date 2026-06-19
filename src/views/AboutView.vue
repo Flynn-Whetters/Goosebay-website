@@ -8,15 +8,13 @@
       </div>
     </section>
 
-
-
     <!-- Bio -->
     <section class="section">
       <div class="container about__grid">
-        <div class="about__photo">
+        <div class="about__photo" data-reveal>
           <img src="../assets/images/Dance wth you promo revised/Goose_Bay_BTS-30.png" alt="GooseBay band photo" class="about__photo-img" />
         </div>
-        <div class="about__text">
+        <div class="about__text" data-reveal data-delay="2">
           <h2>Who We Are</h2>
           <p>
             GooseBay is an indie rock outfit hailing from Australia with a love
@@ -43,7 +41,13 @@
         <h2 class="accent-yellow">The Lineup</h2>
         <hr class="divider" style="background: var(--color-yellow);" />
         <div class="members">
-          <div class="member" v-for="member in members" :key="member.name">
+          <div
+            class="member"
+            v-for="(member, i) in members"
+            :key="member.name"
+            data-reveal
+            :data-delay="String(i + 1)"
+          >
             <div class="member__avatar">
               <img :src="member.image" :alt="member.name" />
             </div>
@@ -62,12 +66,15 @@
 <script setup>
 import '../assets/css/about.css'
 import { ref } from 'vue'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
 import singerImg from '../assets/images/Singer.jpg'
 import guitar1Img from '../assets/images/Guitar1.jpg'
 import guitar2Img from '../assets/images/Guitar2.jpg'
 import bassImg from '../assets/images/Bass.jpg'
 import drumsImg from '../assets/images/Drums.jpg'
+
+useScrollReveal()
 
 const members = ref([
   { name: 'Member 1', role: 'Vocals', image: singerImg },
@@ -77,5 +84,3 @@ const members = ref([
   { name: 'Member 5', role: 'Drums', image: drumsImg },
 ])
 </script>
-
-

@@ -134,6 +134,13 @@
   margin-top: 0.25rem;
 }
 
+.form-error {
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
 /* ---------- Sidebar ---------- */
 .contact__sidebar {
   display: flex;

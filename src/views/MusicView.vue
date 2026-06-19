@@ -14,7 +14,7 @@
     <!-- Spotify Artist Embed -->
     <section class="section">
       <div class="container">
-        <div class="spotify-embed">
+        <div class="spotify-embed" data-reveal>
           <iframe
             style="border-radius: 12px;"
             src="https://open.spotify.com/embed/artist/4Mwja4fqC3KdOBAxY1dfQj?utm_source=generator"
@@ -35,8 +35,10 @@
         <div class="releases">
           <div
             class="release"
-            v-for="release in releases"
+            v-for="(release, i) in releases"
             :key="release.title"
+            data-reveal
+            :data-delay="String(Math.min(i, 3))"
           >
             <div class="release__art">
               <iframe
@@ -89,7 +91,7 @@
       <div class="container">
         <h2 class="accent">Latest Video</h2>
         <hr class="divider" />
-        <div class="video-embed">
+        <div class="video-embed" data-reveal>
           <iframe
             src="https://www.youtube.com/embed/tMegEEow0Vk"
             title="GooseBay — Latest Video"
@@ -110,7 +112,7 @@
         <p style="margin: 1rem auto 2rem; max-width: 500px;">
           Find GooseBay on your favourite platform.
         </p>
-        <div class="stream-platforms">
+        <div class="stream-platforms" data-reveal>
           <a href="https://open.spotify.com/artist/4Mwja4fqC3KdOBAxY1dfQj" target="_blank" rel="noopener noreferrer" class="btn">Spotify</a>
           <a href="#" class="btn">Apple Music</a>
           <a href="https://www.youtube.com/@goosebayband" target="_blank" rel="noopener noreferrer" class="btn">YouTube</a>
@@ -123,8 +125,10 @@
 <script setup>
 import '../assets/css/music.css'
 import { ref } from 'vue'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
 
-// TODO: Replace with real releases
+useScrollReveal()
+
 const releases = ref([
   {
     title: 'First Single',
@@ -137,16 +141,5 @@ const releases = ref([
       { label: 'Spotify', url: 'https://open.spotify.com/track/0gPsjwgNIe81Z87awpBytQ' },
     ],
   },
-  // Add more releases here:
-  // {
-  //   title: 'EP Title',
-  //   type: 'EP',
-  //   year: '2025',
-  //   emoji: '📀',
-  //   description: 'Description goes here.',
-  //   links: [],
-  // },
 ])
 </script>
-
-

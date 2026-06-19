@@ -14,7 +14,7 @@
     <!-- Contact Form -->
     <section class="section">
       <div class="container contact__grid">
-        <form class="contact-form" @submit.prevent="handleSubmit">
+        <form class="contact-form" data-reveal @submit.prevent="handleSubmit">
           <div class="form-group">
             <label for="name">Name</label>
             <input
@@ -59,17 +59,20 @@
             ></textarea>
           </div>
 
-          <button type="submit" class="btn btn--filled" :disabled="submitted">
-            {{ submitted ? 'Sent ✓' : 'Send Message' }}
+          <button type="submit" class="btn btn--filled" :disabled="submitting || submitted">
+            {{ submitted ? 'Sent ✓' : submitting ? 'Sending…' : 'Send Message' }}
           </button>
 
           <p v-if="submitted" class="form-success">
             Thanks for reaching out! We'll get back to you soon.
           </p>
+          <p v-if="error" class="form-error">
+            Something went wrong. Please try again or email us directly.
+          </p>
         </form>
 
         <div class="contact__sidebar">
-          <div class="contact__card">
+          <div class="contact__card" data-reveal data-delay="1">
             <h3>Get in Touch</h3>
             <p>
               <strong>Email:</strong><br />
@@ -87,7 +90,7 @@
             </p>
           </div>
 
-          <div class="contact__card">
+          <div class="contact__card" data-reveal data-delay="2">
             <h3>Booking</h3>
             <p>
               For live shows and booking enquiries, flick us an email or DM us
@@ -103,6 +106,11 @@
 <script setup>
 import '../assets/css/contact.css'
 import { ref, reactive } from 'vue'
+import { useScrollReveal } from '../composables/useScrollReveal.js'
+
+useScrollReveal()
+
+const FORMSPREE_ID = 'YOUR_FORM_ID' // Replace with your Formspree form ID (formspree.io/new)
 
 const form = reactive({
   name: '',
@@ -111,23 +119,37 @@ const form = reactive({
   message: '',
 })
 
+const submitting = ref(false)
 const submitted = ref(false)
+const error = ref(false)
 
-function handleSubmit() {
-  // TODO: Wire up to a backend (Node.js API, Formspree, Netlify Forms, etc.)
-  // For now, just show a success state.
-  console.log('Form submitted:', { ...form })
-  submitted.value = true
+async function handleSubmit() {
+  submitting.value = true
+  error.value = false
 
-  // Reset after 4 seconds
-  setTimeout(() => {
-    submitted.value = false
-    form.name = ''
-    form.email = ''
-    form.subject = 'general'
-    form.message = ''
-  }, 4000)
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(form),
+    })
+
+    if (res.ok) {
+      submitted.value = true
+      setTimeout(() => {
+        submitted.value = false
+        form.name = ''
+        form.email = ''
+        form.subject = 'general'
+        form.message = ''
+      }, 5000)
+    } else {
+      error.value = true
+    }
+  } catch {
+    error.value = true
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
-
-
