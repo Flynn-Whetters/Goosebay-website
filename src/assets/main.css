@@ -2,21 +2,20 @@
    GooseBay — Bold Retro 70s Gig Poster Theme
    ============================================ */
 
-/* ---------- CSS Custom Properties ---------- */
 :root {
-  /* Bold retro palette */
-  --color-orange:      #F28C28;
-  --color-purple:      #7B3FBF;
-  --color-yellow:      #F4C430;
-  --color-blue:        #3A6EA5;
-  --color-cream:       #F5E6D3;
-  --color-off-black:   #1A1A1A;
+  /* Brand palette */
+  --color-orange:       #E8721C;
+  --color-purple:       #5C2D7E;
+  --color-yellow:       #F0B429;
+  --color-dusty-rose:   #C4785A;
+  --color-cream:        #F2E2C4;
+  --color-off-black:    #1C1410;
 
   /* Derived */
-  --color-purple-dark: #5A2D8C;
-  --color-orange-dark: #D4711F;
-  --color-blue-dark:   #2C5580;
-  --color-yellow-light:#FBE19A;
+  --color-purple-dark:  #421D5E;
+  --color-orange-dark:  #C55F14;
+  --color-olive:        #8A8A4A;
+  --color-yellow-light: #F5D88A;
 
   /* Typography */
   --font-display: 'Lilita One', cursive;
@@ -26,14 +25,23 @@
   --space-xs:  0.5rem;
   --space-sm:  1rem;
   --space-md:  2rem;
-  --space-lg:  4rem;
-  --space-xl:  8rem;
+  --space-lg:  5rem;
+  --space-xl:  9rem;
 
   /* Border radius */
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 30px;
-  --radius-full: 50px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-full: 999px;
+
+  /* Neo-brutalist hard shadow system */
+  --shadow-sm:        3px 3px 0 var(--color-purple);
+  --shadow-md:        5px 5px 0 var(--color-purple);
+  --shadow-lg:        8px 8px 0 var(--color-purple);
+  --shadow-orange-sm: 3px 3px 0 var(--color-orange);
+  --shadow-orange:    5px 5px 0 var(--color-orange);
+  --shadow-yellow:    5px 5px 0 var(--color-yellow);
+  --shadow-dark:      5px 5px 0 rgba(0,0,0,0.5);
 }
 
 /* ---------- Reset & Base ---------- */
@@ -58,16 +66,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle noise / grain overlay for that analog feel */
+/* Analog grain overlay */
 body::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.04;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
@@ -78,30 +83,31 @@ body::after {
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   letter-spacing: 0.02em;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
-h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); }
-h3 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.2rem, 2.2vw, 1.7rem); }
 
 p {
   max-width: 65ch;
   font-size: 1.05rem;
   font-weight: 500;
+  line-height: 1.75;
 }
 
 a {
   color: var(--color-purple);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 a:hover {
   color: var(--color-orange);
 }
 
-/* ---------- Utility Classes ---------- */
+/* ---------- Layout ---------- */
 .container {
   width: 90%;
   max-width: 1200px;
@@ -111,107 +117,128 @@ a:hover {
 .section {
   padding: var(--space-lg) 0;
   position: relative;
+  z-index: 2;
+  background-color: var(--color-cream);
 }
 
-.section--purple {
-  background-color: var(--color-purple);
-  color: var(--color-cream);
-}
+.section--purple { background-color: var(--color-purple); color: var(--color-cream); }
+.section--orange { background-color: var(--color-orange); color: var(--color-off-black); }
+.section--yellow { background-color: var(--color-yellow); color: var(--color-off-black); }
+.section--dark   { background-color: var(--color-off-black); color: var(--color-cream); }
+.section--alt    { background-color: var(--color-off-black); color: var(--color-cream); }
 
-.section--orange {
-  background-color: var(--color-orange);
-  color: var(--color-off-black);
-}
+/* ---------- Utilities ---------- */
+.text-center  { text-align: center; }
+.accent       { color: var(--color-purple); }
+.accent-orange{ color: var(--color-orange); }
+.accent-yellow{ color: var(--color-yellow); }
 
-.section--yellow {
-  background-color: var(--color-yellow);
-  color: var(--color-off-black);
-}
-
-.section--dark {
-  background-color: var(--color-off-black);
-  color: var(--color-cream);
-}
-
-.section--alt {
-  background-color: var(--color-off-black);
-  color: var(--color-cream);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.accent {
-  color: var(--color-purple);
-}
-
-.accent-orange {
+/* Eyebrow / kicker pill */
+.section-label {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
   color: var(--color-orange);
-}
-
-.accent-yellow {
-  color: var(--color-yellow);
+  border: 2px solid var(--color-orange);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
-  padding: 0.9rem 2.4rem;
+  padding: 0.85rem 2.2rem;
   font-family: var(--font-display);
-  font-size: 1rem;
-  letter-spacing: 0.06em;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  border: none;
+  border: 2px solid var(--color-purple);
   border-radius: var(--radius-full);
   background: var(--color-purple);
   color: var(--color-cream);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(123, 63, 191, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn:hover {
   background: var(--color-purple-dark);
+  border-color: var(--color-purple-dark);
   color: var(--color-cream);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(123, 63, 191, 0.4);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--color-purple-dark);
 }
 
 .btn--filled {
   background: var(--color-orange);
+  border-color: var(--color-orange);
   color: var(--color-off-black);
-  box-shadow: 0 4px 15px rgba(242, 140, 40, 0.3);
+  box-shadow: var(--shadow-orange-sm);
 }
 
 .btn--filled:hover {
   background: var(--color-orange-dark);
+  border-color: var(--color-orange-dark);
   color: var(--color-cream);
-  box-shadow: 0 6px 20px rgba(242, 140, 40, 0.4);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-orange);
+}
+
+.btn--filled:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--color-orange-dark);
 }
 
 .btn--yellow {
   background: var(--color-yellow);
+  border-color: var(--color-yellow);
   color: var(--color-off-black);
-  box-shadow: 0 4px 15px rgba(244, 196, 48, 0.3);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.35);
 }
 
 .btn--yellow:hover {
-  background: var(--color-orange);
+  background: var(--color-yellow-light);
+  border-color: var(--color-yellow-light);
   color: var(--color-off-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.35);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 2px solid currentColor;
+  box-shadow: none;
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 currentColor;
+}
+
+/* ---------- Divider ---------- */
+.divider {
+  width: 52px;
+  height: 3px;
+  background: var(--color-orange);
+  margin: 0.9rem auto;
+  border: none;
+  border-radius: 2px;
 }
 
 /* ---------- Animations ---------- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -219,15 +246,10 @@ a:hover {
   to   { opacity: 1; }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.8s ease forwards;
-}
+.fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.fade-in    { animation: fadeIn 0.9s ease forwards; }
 
-.fade-in {
-  animation: fadeIn 1s ease forwards;
-}
-
-/* ---------- Wavy Section Dividers ---------- */
+/* ---------- Wave Dividers ---------- */
 .wave-divider {
   width: 100%;
   line-height: 0;
@@ -240,33 +262,11 @@ a:hover {
   height: 60px;
 }
 
-/* ---------- Dividers ---------- */
-.divider {
-  width: 80px;
-  height: 4px;
-  background: var(--color-orange);
-  margin: var(--space-sm) auto;
-  border: none;
-  border-radius: 2px;
-}
-
-/* ---------- Scrollbar (Webkit) ---------- */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-purple);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-purple-dark);
-}
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--color-cream); }
+::-webkit-scrollbar-thumb  { background: var(--color-purple); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-purple-dark); }
 
 /* ---------- Selection ---------- */
 ::selection {

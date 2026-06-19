@@ -1,0 +1,16 @@
+/* ============================================
+   App-level Styles (Page Transitions)
+   ============================================ */
+
+.page-enter-active {
+  transition: opacity 0.18s ease;
+}
+
+.page-leave-active {
+  transition: opacity 0.12s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}

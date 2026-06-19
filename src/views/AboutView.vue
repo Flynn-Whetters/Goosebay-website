@@ -60,6 +60,7 @@
 </template>
 
 <script setup>
+import '../assets/css/about.css'
 import { ref } from 'vue'
 
 import singerImg from '../assets/images/Singer.jpg'
@@ -77,110 +78,4 @@ const members = ref([
 ])
 </script>
 
-<style scoped>
-.page-header {
-  padding: calc(var(--space-xl) + 2rem) 0 var(--space-md);
-  text-align: center;
-}
 
-.about__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  align-items: center;
-}
-
-.about__photo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  border: 4px solid var(--color-purple);
-  box-shadow: 6px 6px 0 var(--color-orange);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.about__photo-img:hover {
-  transform: rotate(-1deg) scale(1.02);
-  box-shadow: 8px 8px 0 var(--color-yellow);
-}
-
-.about__text {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.about__text h2 {
-  color: var(--color-purple);
-}
-
-/* Members Grid */
-.members {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.member {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: var(--radius-lg);
-  padding: 2rem 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.member:hover {
-  transform: translateY(-6px) rotate(-1deg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
-
-.member__avatar {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 0.75rem;
-  border: 4px solid var(--color-yellow);
-  box-shadow: 3px 3px 0 var(--color-orange);
-}
-
-.member__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.member:hover .member__avatar img {
-  transform: scale(1.08);
-}
-
-.member h3 {
-  color: var(--color-cream);
-}
-
-.member__role {
-  font-size: 0.85rem;
-  color: var(--color-yellow);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 0.25rem;
-  font-weight: 700;
-}
-
-.about__note {
-  margin-top: 2rem;
-  font-size: 0.85rem;
-  opacity: 0.5;
-}
-
-@media (max-width: 768px) {
-  .about__grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-}
-</style>

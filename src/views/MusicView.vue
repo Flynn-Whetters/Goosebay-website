@@ -6,7 +6,7 @@
         <h1 class="accent">Music</h1>
         <hr class="divider" />
         <p style="margin-top: 1rem; opacity: 0.8;">
-          Every track, every release — all in one place.
+          Every track, every release all in one place.
         </p>
       </div>
     </section>
@@ -43,7 +43,7 @@
                 style="border-radius: 8px;"
                 :src="release.embedUrl"
                 width="100%"
-                height="280"
+                height="352"
                 frameBorder="0"
                 allowfullscreen
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -84,6 +84,24 @@
       </div>
     </section>
 
+    <!-- YouTube Video -->
+    <section class="section text-center">
+      <div class="container">
+        <h2 class="accent">Latest Video</h2>
+        <hr class="divider" />
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/tMegEEow0Vk"
+            title="GooseBay — Latest Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Streaming CTA -->
     <section class="section section--orange text-center">
       <div class="container">
@@ -95,7 +113,7 @@
         <div class="stream-platforms">
           <a href="https://open.spotify.com/artist/4Mwja4fqC3KdOBAxY1dfQj" target="_blank" rel="noopener noreferrer" class="btn">Spotify</a>
           <a href="#" class="btn">Apple Music</a>
-          <a href="#" class="btn">YouTube</a>
+          <a href="https://www.youtube.com/@goosebayband" target="_blank" rel="noopener noreferrer" class="btn">YouTube</a>
         </div>
       </div>
     </section>
@@ -103,6 +121,7 @@
 </template>
 
 <script setup>
+import '../assets/css/music.css'
 import { ref } from 'vue'
 
 // TODO: Replace with real releases
@@ -130,116 +149,4 @@ const releases = ref([
 ])
 </script>
 
-<style scoped>
-.page-header {
-  padding: calc(var(--space-xl) + 2rem) 0 var(--space-md);
-}
 
-/* Spotify Embed */
-.spotify-embed {
-  max-width: 700px;
-  margin: 0 auto;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 6px 6px 0 var(--color-purple);
-}
-
-/* Releases */
-.releases {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.release {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 2rem;
-  align-items: start;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  color: var(--color-cream);
-}
-
-.release:hover {
-  transform: translateY(-5px) rotate(-0.5deg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-}
-
-.release__art {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  min-height: 280px;
-}
-
-.release__placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-}
-
-.release__type {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-yellow);
-  font-weight: 700;
-}
-
-.release__info h3 {
-  margin-top: 0.25rem;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--color-cream);
-}
-
-.release__year {
-  font-size: 0.85rem;
-  opacity: 0.6;
-  margin-top: 0.1rem;
-}
-
-.release__desc {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
-  opacity: 0.85;
-}
-
-.release__links {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 1.25rem;
-}
-
-.release__links .btn {
-  padding: 0.5rem 1.2rem;
-  font-size: 0.8rem;
-}
-
-/* Stream platforms */
-.stream-platforms {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-  .release {
-    grid-template-columns: 1fr;
-  }
-
-  .release__art {
-    max-width: 280px;
-  }
-}
-</style>
