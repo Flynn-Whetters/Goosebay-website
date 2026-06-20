@@ -4,5 +4,10 @@ import router from './router'
 import './assets/main.css'
 
 const app = createApp(App)
+
+app.config.errorHandler = (err, instance, info) => {
+  console.error('[GooseBay] Unhandled error:', err, info)
+}
+
 app.use(router)
 app.mount('#app')

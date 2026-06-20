@@ -243,6 +243,7 @@ onMounted(() => startAutoplay())
 onUnmounted(() => {
   stopAutoplay()
   window.removeEventListener('keydown', onLightboxKey)
+  document.body.style.overflow = ''
 })
 
 // Photo strip

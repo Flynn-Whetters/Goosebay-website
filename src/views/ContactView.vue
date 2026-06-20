@@ -76,7 +76,7 @@
             <h3>Get in Touch</h3>
             <p>
               <strong>Email:</strong><br />
-              <a href="mailto:hello@goosebay.band">hello@goosebay.band</a>
+              <a href="mailto:Band.Goosebay@gmail.com">Band.Goosebay@gmail.com</a>
             </p>
             <p style="margin-top: 1rem;">
               <strong>Socials:</strong><br />

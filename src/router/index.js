@@ -1,17 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeView    from '../views/HomeView.vue'
-import AboutView   from '../views/AboutView.vue'
-import MusicView   from '../views/MusicView.vue'
-import ShowsView   from '../views/ShowsView.vue'
-import ContactView from '../views/ContactView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const routes = [
-  { path: '/',        name: 'Home',    component: HomeView    },
-  { path: '/about',   name: 'About',   component: AboutView   },
-  { path: '/music',   name: 'Music',   component: MusicView   },
-  { path: '/shows',   name: 'Shows',   component: ShowsView   },
-  { path: '/contact', name: 'Contact', component: ContactView },
+  { path: '/',        name: 'Home',    component: HomeView },
+  { path: '/about',   name: 'About',   component: () => import('../views/AboutView.vue') },
+  { path: '/music',   name: 'Music',   component: () => import('../views/MusicView.vue') },
+  { path: '/shows',   name: 'Shows',   component: () => import('../views/ShowsView.vue') },
+  { path: '/contact', name: 'Contact', component: () => import('../views/ContactView.vue') },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
